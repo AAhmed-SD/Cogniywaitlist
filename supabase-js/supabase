@@ -1,16 +1,20 @@
 import { createClient } from '@supabase/supabase-js';
+import dotenv from 'dotenv';
 
-// Supabase credentials
-const supabaseUrl = 'https://koidkotynqdkidkvubcd.supabase.co'; // Replace with your Supabase URL
-const supabaseKey = 'your-anon-or-service-role-key'; // Replace with your Supabase API key
+// Load environment variables
+dotenv.config();
+
+// Supabase credentials from .env
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_ANON_KEY;
 
 // Create a Supabase client
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-// Example: Fetch data from a table
+// Test the connection by fetching data from a table
 const fetchData = async () => {
     const { data, error } = await supabase
-        .from('your_table_name') // Replace 'your_table_name' with the name of your table
+        .from('your_table_name') // Replace 'your_table_name' with the actual table name
         .select('*');
 
     if (error) {
